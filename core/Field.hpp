@@ -34,6 +34,9 @@ public:
 
     int operator()(size_t row, size_t column) const;
 
+    const std::vector<FixedCell>& getFixedCells() const;
+    const std::vector<Cage>& getCages() const;
+
 private:
     std::vector<FixedCell> m_fixedCells;
     std::vector<Cage> m_cages;

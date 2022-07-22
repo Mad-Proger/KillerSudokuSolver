@@ -61,6 +61,16 @@ int Field::operator()(size_t row, size_t column) const
     return it == m_fixedCells.end() ? 0 : it->value;
 }
 
+const std::vector<Field::FixedCell>& Field::getFixedCells() const
+{
+    return m_fixedCells;
+}
+
+const std::vector<Field::Cage>& Field::getCages() const
+{
+    return m_cages;
+}
+
 bool Field::checkCagePossibility(const Field::Cage& cage) const
 {
     auto checkIntersection = [&cage](const Field::Cage& other) -> bool {
