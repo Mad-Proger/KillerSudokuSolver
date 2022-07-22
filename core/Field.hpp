@@ -1,5 +1,7 @@
 #pragma once
+#include <algorithm>
 #include <cstddef>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 
@@ -35,4 +37,6 @@ public:
 private:
     std::vector<FixedCell> m_fixedCells;
     std::vector<Cage> m_cages;
+
+    bool checkCagePossibility(const Cage& cage) const;
 };
