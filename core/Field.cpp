@@ -36,7 +36,9 @@ void Field::removeAllCages()
 
 void Field::removeFixedCell(size_t row, size_t column)
 {
-    auto it = std::find(m_fixedCells.begin(), m_fixedCells.end(), std::pair{ row, column });
+    auto it = std::find_if(m_fixedCells.begin(), m_fixedCells.end(), [&row, &column](const FixedCell& cell) {
+        return cell.row == row && cell.column == column;
+    });
     if (it != m_fixedCells.end())
     {
         std::swap(*it, m_fixedCells.back());
@@ -57,7 +59,9 @@ void Field::clear()
 
 int Field::operator()(size_t row, size_t column) const
 {
-    auto it = std::find(m_fixedCells.begin(), m_fixedCells.end(), std::pair{ row, column });
+    auto it = std::find_if(m_fixedCells.begin(), m_fixedCells.end(), [&row, &column](const FixedCell& cell) {
+        return cell.row == row && cell.column == column;
+    });
     return it == m_fixedCells.end() ? 0 : it->value;
 }
 
