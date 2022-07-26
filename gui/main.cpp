@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_EVERYTHING);
 
     const auto [width, height] = getWindowSize();
-    SolverWindow window(width, height);
+    { SolverWindow window(width, height); }
 
     SDL_Quit();
     return 0;
