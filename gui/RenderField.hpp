@@ -1,4 +1,6 @@
-#include "../core/Field.hpp"
+#pragma once
+
+#include "core/Field.hpp"
 
 #include <SDL2/SDL.h>
 

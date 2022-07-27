@@ -4,9 +4,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 project(GUI VERSION 0.1)
 
-add_executable(GUI
+set(CORE_SRC
+    core/Field.cpp
+    core/Solver.cpp
+)
+
+set(GUI_SRC
     gui/main.cpp
     gui/SolverWindow.cpp
+    gui/RenderField.cpp
+)
+
+add_executable(GUI
+    ${GUI_SRC}
+    ${CORE_SRC}
 )
 
 target_link_libraries(GUI PRIVATE SDL2 pthread)
+target_include_directories(GUI PRIVATE ${PROJECT_SOURCE_DIR})
