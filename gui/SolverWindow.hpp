@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RenderField.hpp"
+
 #include <SDL2/SDL.h>
 
 #include <chrono>
@@ -16,6 +18,7 @@ private:
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
     std::thread m_eventLoopThread;
+    RenderField m_renderField;
 
     void eventLoop(int width, int height);
 

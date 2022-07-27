@@ -1,7 +1,10 @@
 #include "SolverWindow.hpp"
 
-SolverWindow::SolverWindow(int width, int height) : 
-    m_eventLoopThread(&SolverWindow::eventLoop, this, width, height) {};
+SolverWindow::SolverWindow(int width, int height) : m_renderField(width, height) 
+{
+    m_eventLoopThread = std::thread(&SolverWindow::eventLoop,
+                                    this, width, height);
+}
 
 SolverWindow::~SolverWindow()
 {
@@ -23,19 +26,19 @@ void SolverWindow::eventLoop(int width, int height)
     if (m_renderer == nullptr)
         throw std::runtime_error(SDL_GetError());
 
-
-    bool windowOpen = true;
-    while (windowOpen)
+    while (true)
     {
         SDL_Event evnt{};
         while (SDL_PollEvent(&evnt))
         {
             if (evnt.type == SDL_QUIT)
-            {
-                windowOpen = false;
-                break;
-            }
+                return;
+            m_renderField.processEvent(evnt);
         }
+
+        SDL_RenderClear(m_renderer);
+        m_renderField.draw(m_renderer);
+        SDL_RenderPresent(m_renderer);
 
         std::this_thread::sleep_for(RENDER_DELAY);
     }
